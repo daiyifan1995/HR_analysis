@@ -27,14 +27,19 @@ test_data=df.iloc[int(train_max_row):]
 #Attrition
 target=train_data.pop("Attrition") #删除Attrition并返回
 
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(min_impurity_split=0.2)
 clf.fit(train_data,target)
+nameList=train_data.columns.values.tolist()
 
 
 
 dot_data=tree.export_graphviz(clf,
                 filled=True, rounded=True,
-                special_characters=True)
+                special_characters=True,feature_names=nameList)
 graph = graphviz.Source(dot_data)
 graph.render("test.gv",view=True)
-print(graph.source)
+
+test_target=test_data.pop("Attrition")
+
+print("Decision Tree score: %f"%(clf.score(test_data,test_target)))
+

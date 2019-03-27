@@ -48,6 +48,7 @@ df.count()#检查各列的数据
 
 #                                                  data visualtion，使用直方图确定数据离散化的bins，等宽或者等深
 
+
 num_bins_Age=3
 interval_age=14
 df=discretization.discretizationByHist(df,"Age",num_bins_Age,interval_age)
